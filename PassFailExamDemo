@@ -7,7 +7,7 @@ public class PassFailExamDemo {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Exam Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
+        frame.setSize(450, 350);
         frame.setLayout(new GridLayout(5, 1, 10, 10));
         
         JPanel questionsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -65,12 +65,7 @@ public class PassFailExamDemo {
                     scoreLabel.setText("The exam score is " + exam.getScore());
                     gradeLabel.setText("The exam grade is " + exam.getGrade());
                     
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(frame, 
-                                                "Please enter valid numbers for all fields.",
-                                                "Input Error",
-                                                JOptionPane.ERROR_MESSAGE);
-                }
+                } 
             }
         });
         
