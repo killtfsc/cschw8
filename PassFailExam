@@ -1,0 +1,33 @@
+package cschw8;
+
+public class PassFailExam {
+    private int totalQuestions;
+    private int missedQuestions;
+    private double passingScore;
+
+    public PassFailExam(int totalQuestions, int missedQuestions, double passingScore) {
+        this.totalQuestions = totalQuestions;
+        this.missedQuestions = missedQuestions;
+        this.passingScore = passingScore;
+    }
+
+    public double getPointsEach() {
+        if (totalQuestions > 0) {
+            return 100.0 / totalQuestions;  
+        }
+        return 0.0;  
+    }
+
+    public double getScore() {
+        return (totalQuestions - missedQuestions) * getPointsEach();
+    }
+
+    public String getGrade() {
+        double score = getScore();
+        if (score >= passingScore) {
+            return "Pass";
+        } else {
+            return "Fail";
+        }
+    }
+}
