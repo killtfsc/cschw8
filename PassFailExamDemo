@@ -1,0 +1,79 @@
+import javax.swing.*;
+import cschw8.PassFailExam;
+import java.awt.*;
+import java.awt.event.*;
+
+public class PassFailExamDemo {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Exam Calculator");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+        frame.setLayout(new GridLayout(5, 1, 10, 10));
+        
+        JPanel questionsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel missedPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel passingPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel resultPanel = new JPanel(new GridLayout(3, 1));
+        
+        JLabel questionsLabel = new JLabel("How many questions are on the exam?");
+        JTextField questionsField = new JTextField(10);
+        
+        JLabel missedLabel = new JLabel("How many questions did the student miss?");
+        JTextField missedField = new JTextField(10);
+        
+        JLabel passingLabel = new JLabel("What is the minimum passing score?");
+        JTextField passingField = new JTextField(10);
+        
+        JButton calculateButton = new JButton("Calculate");
+        
+        JLabel pointsLabel = new JLabel();
+        JLabel scoreLabel = new JLabel();
+        JLabel gradeLabel = new JLabel();
+        
+        questionsPanel.add(questionsLabel);
+        questionsPanel.add(questionsField);
+        
+        missedPanel.add(missedLabel);
+        missedPanel.add(missedField);
+        
+        passingPanel.add(passingLabel);
+        passingPanel.add(passingField);
+        
+        buttonPanel.add(calculateButton);
+        
+        resultPanel.add(pointsLabel);
+        resultPanel.add(scoreLabel);
+        resultPanel.add(gradeLabel);
+        
+        frame.add(questionsPanel);
+        frame.add(missedPanel);
+        frame.add(passingPanel);
+        frame.add(buttonPanel);
+        frame.add(resultPanel);
+        
+        calculateButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int questions = Integer.parseInt(questionsField.getText());
+                    int missed = Integer.parseInt(missedField.getText());
+                    double minPassing = Double.parseDouble(passingField.getText());
+                    
+                    PassFailExam exam = new PassFailExam(questions, missed, minPassing);
+                    
+                    pointsLabel.setText("Each question counts " + exam.getPointsEach() + " points.");
+                    scoreLabel.setText("The exam score is " + exam.getScore());
+                    gradeLabel.setText("The exam grade is " + exam.getGrade());
+                    
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(frame, 
+                                                "Please enter valid numbers for all fields.",
+                                                "Input Error",
+                                                JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        
+        frame.setVisible(true);
+    }
+}
